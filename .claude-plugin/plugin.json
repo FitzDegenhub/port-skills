@@ -1,0 +1,23 @@
+{
+  "name": "port",
+  "displayName": "Port_",
+  "version": "1.0.0",
+  "description": "Read your own Port_ port from Claude Code: net worth, holdings, DeFi, PnL, with the caveats the app shows.",
+  "author": {
+    "name": "Port_",
+    "url": "https://getport.app"
+  },
+  "homepage": "https://getport.app/docs",
+  "repository": "https://github.com/FitzDegenhub/port-skills",
+  "keywords": ["port", "portfolio", "crypto", "mcp"],
+  "skills": ["./port-api", "./port-mcp"],
+  "userConfig": {
+    "PORT_API_KEY": {
+      "type": "string",
+      "title": "Port_ API key",
+      "description": "Your Port_ API key, made under Settings, API access, at getport.app/settings/api. It starts port_.",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

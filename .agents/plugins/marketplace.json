@@ -1,0 +1,12 @@
+{
+  "name": "port",
+  "interface": { "displayName": "Port_" },
+  "plugins": [
+    {
+      "name": "port",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Finance"
+    }
+  ]
+}

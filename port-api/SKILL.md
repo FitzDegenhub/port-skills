@@ -1,0 +1,144 @@
+---
+name: port-api
+description: >-
+  Use when the person asks about their own Port_ port: what it is worth, what they hold,
+  what is in DeFi, their perps, prediction markets, NFTs, PnL and cost basis, what moved in
+  their wallets, their daily briefing or their alerts. Reads it over the Port_ REST API at
+  https://getport.app/api/v1 with their own key. Read only.
+
+  TRIGGERS: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
+  wallet, Port_
+metadata:
+  author: getport
+  version: "1.0"
+---
+
+# Port_ API
+
+[Port_](https://getport.app) is a read-only crypto portfolio tracker. This API reads one
+account's own port, the one the key belongs to, from the same snapshot the app's screens read.
+It cannot move funds, sign anything, change a setting or reach a chain on anybody's behalf.
+Docs: [getport.app/docs](https://getport.app/docs).
+
+## Authentication
+
+Every request carries `Authorization: Bearer $PORT_API_KEY`. The person makes a key under
+Settings, API access, at [getport.app/settings/api](https://getport.app/settings/api). It is
+shown once, starts `port_`, and needs a Pro account. Read it from the environment, never ask
+for it in the chat, and never print it, echo it or write it to a file.
+
+If the MCP skill is set up instead (`port-mcp`), the same questions go through its tools and
+this skill is the reference for what the answers mean.
+
+## Summary
+
+|                    |                                                        |
+| ------------------ | ------------------------------------------------------ |
+| Base URL           | `https://getport.app/api/v1`                           |
+| Auth               | `Authorization: Bearer $PORT_API_KEY`                  |
+| Format             | JSON, amounts and USD figures as strings               |
+| Limits             | 60 requests a minute, 5000 a day, 20 refreshes a day   |
+| OpenAPI            | `https://getport.app/api/v1/openapi.json`, no key      |
+| Endpoint reference | [references/endpoints.md](references/endpoints.md)     |
+
+## The envelope, and how to read it
+
+Every answer is `{ data, asOf, notCounted, sources, generatedAt }`.
+
+- `asOf` is the oldest wallet read the answer rests on. Null means at least one wallet has
+  never been read, so any total is a floor.
+- `notCounted` is one sentence saying what the headline leaves out: rows priced by pools too
+  thin to sell into, rows nothing has priced, stale quotes. Null when nothing is left out.
+- `sources` names the price sources behind the answer.
+
+The reading rules are the product's, and they are what keeps a figure honest:
+
+1. **Quote `asOf` and `notCounted` with any figure.** A net worth without its caveat misleads
+   by omission. Say how old it is and what is not in it, in the product's own sentence.
+2. **Never sum rows whose `counted` is false.** A price below the confidence bar is shown on
+   its row and never added to anything. Show it, say it is not counted, leave it out of sums.
+3. **`/port` is the total. Never add up `/holdings` yourself.** The headline includes DeFi,
+   venue balances and perp equity that no holdings row carries, and leaves out what the
+   product will not vouch for. Your own sum will be wrong both ways.
+4. **A watched wallet is left out.** The port, holdings, DeFi, perps, predictions, NFTs and
+   activity cover the wallets the person owns and has not excluded, as the screens do, and a
+   refresh reads only those. PnL and `/me`'s `walletCount` cover every wallet on the account.
+   `/wallets` lists every wallet, watched and excluded ones marked.
+5. **Keep paging `/activity` until the cursor is null.** A page can come back empty with a
+   cursor that is not null. The same goes for `/holdings`. Never build a cursor.
+6. **NFT floors are not in net worth**, and the answer says so. Do not add them in.
+7. **Predictions are never in net worth either.**
+8. **A PnL with `complete: false` is not final.** Say which disposals had no matched purchase
+   or no recorded price before quoting a realised figure.
+
+## Session preflight
+
+Run once and keep the answer:
+
+```bash
+curl -s https://getport.app/api/v1/me -H "Authorization: Bearer $PORT_API_KEY"
+```
+
+It says whose key it is, the tier, how many wallets and the key's own name. A 401 means the
+key is missing, wrong, revoked or expired; a 402 `upgrade_required` means the account is no
+longer Pro. Say that plainly rather than retrying.
+
+## Which endpoint answers what
+
+| The person asks | Call |
+| --------------- | ---- |
+| What is my port worth, by wallet | `GET /port` |
+| What is not counted, and why | `GET /port`, read `notCounted` and `hidden` |
+| How fresh is it, which chains answered short | `GET /port`, read `chains[]` |
+| What do I hold | `GET /holdings`, paged, `?wallet=` `?chain=` to narrow |
+| Show me the rows the app hides | `GET /holdings?hidden=1`, each row says why |
+| What do I have in DeFi, with debts | `GET /positions` |
+| What perps do I have open | `GET /perps` |
+| What prediction markets am I in | `GET /predictions` |
+| What NFTs do I hold | `GET /nfts` |
+| What is my PnL, what did I lose on | `GET /pnl`, `?method=fifo` `lifo` `hifo` `average` |
+| What moved in my wallets | `GET /activity`, paged to the end |
+| What does my briefing say | `GET /briefing`, `?day=YYYY-MM-DD` |
+| Which alerts fired | `GET /alerts` |
+| Which wallets are on the account | `GET /wallets` |
+| Read my wallets again now | `POST /refresh`, only with a key allowed to |
+
+Paths are under `https://getport.app/api/v1`. Every call is the same shape:
+
+```bash
+curl -s https://getport.app/api/v1/port -H "Authorization: Bearer $PORT_API_KEY"
+```
+
+## Answers that are not faults
+
+- `404 no_briefing`: no briefing has been written yet, or none for that day. Normal for a new
+  account.
+- `403 refresh_not_allowed`: the key was made without the refresh switch. Only the person can
+  make a key that may refresh, in Settings.
+- `429 rate_limited`: wait for the `Retry-After` seconds. Do not loop.
+- `holdings` with `complete: false`: the server capped the rows it read for a port this size,
+  so the pages end before `total`. Say so.
+
+Errors are `{ error, message }`. Quote the `message`, it is written for a person.
+
+## Rules
+
+- Never print the key, never put it in a URL, never write it to disk.
+- Prefer `/port` for any total. Never add `/holdings` rows yourself.
+- Never sum a row whose `counted` is false.
+- Quote `asOf` and `notCounted` with every figure you give.
+- Refresh only when asked. It costs the account one of 20 a day and the answer is the queue,
+  not the new figures: read `/port` again after a minute or two.
+- Join tokens by contract address, never by ticker. A ticker is what impersonation attacks.
+
+## References
+
+| File | Purpose |
+| ---- | ------- |
+| [references/endpoints.md](references/endpoints.md) | Every endpoint: parameters, notes, the fields of `data`, a curl. Generated from the API's own table |
+
+## Links
+
+- Docs: [getport.app/docs](https://getport.app/docs)
+- Make a key: [getport.app/settings/api](https://getport.app/settings/api)
+- Agent-readable summary: [getport.app/llms.txt](https://getport.app/llms.txt)

@@ -1,0 +1,14 @@
+{
+  "name": "port",
+  "owner": { "name": "Port_", "url": "https://getport.app" },
+  "metadata": {
+    "description": "Read your own Port_ port from Claude Code: net worth, holdings, DeFi, PnL, with the caveats the app shows."
+  },
+  "plugins": [
+    {
+      "name": "port",
+      "source": "./",
+      "description": "Read your own Port_ port from Claude Code: net worth, holdings, DeFi, PnL, with the caveats the app shows."
+    }
+  ]
+}

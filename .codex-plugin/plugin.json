@@ -1,0 +1,33 @@
+{
+  "name": "port",
+  "version": "1.0.0",
+  "description": "Read your own Port_ port from Codex: net worth, holdings, DeFi, PnL, with the caveats the app shows.",
+  "author": { "name": "Port_", "url": "https://getport.app" },
+  "homepage": "https://getport.app/docs",
+  "repository": "https://github.com/FitzDegenhub/port-skills",
+  "keywords": ["port", "portfolio", "crypto", "mcp"],
+  "skills": ["./port-api", "./port-mcp"],
+  "mcpServers": {
+    "port": {
+      "type": "http",
+      "url": "https://getport.app/mcp",
+      "bearer_token_env_var": "PORT_API_KEY"
+    }
+  },
+  "interface": {
+    "displayName": "Port_",
+    "shortDescription": "Read your own Port_ port, read only",
+    "longDescription": "Net worth, holdings, DeFi, perps, predictions, NFTs, PnL, activity, the daily briefing and alerts from your own Port_ account, with what is not counted and how old it is. Needs a Pro account and PORT_API_KEY in the environment.",
+    "developerName": "Port_",
+    "category": "Finance",
+    "capabilities": ["Read"],
+    "websiteURL": "https://getport.app",
+    "privacyPolicyURL": "https://getport.app/legal/privacy",
+    "termsOfServiceURL": "https://getport.app/legal/terms",
+    "defaultPrompt": [
+      "What is my Port_ worth right now, and what is not counted?",
+      "What moved in my wallets this week?",
+      "What is my realised PnL this year?"
+    ]
+  }
+}
