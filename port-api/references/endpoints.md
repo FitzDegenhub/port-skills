@@ -59,6 +59,7 @@ Notes:
 
 - Pages end when `cursor` is null; pass it back as `?cursor=` for the next one. The cursor is opaque, so never build one.
 - `total` counts every row the wallets hold, folded ones included and before any `?chain=` filter, so the pages add up to it only with `?hidden=1` and no chain. `complete: false` means the server also capped the rows it read for a port this size, and then the pages end short of `total` whatever you ask.
+- `counted` says whether a row is inside the headline, and `hiddenReason` why the app folds it; the default page is the rows with no `hiddenReason`. The two differ: a small row is counted and folded, and a bought token quoted below the confidence bar is on screen and not counted. `/port` is still the total, because DeFi, venue balances and perp equity are on no holdings row.
 
 Fields of `data`: `rows`, `total`, `cursor`, `complete`.
 

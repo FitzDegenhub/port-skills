@@ -109,9 +109,14 @@ counted, then one line of what came back, then how old it is. `structuredContent
 These are the product's rules, and they are what keeps a figure honest:
 
 1. **Quote the caveat and the age with any figure.** The text block's first sentence is the
-   product's own line on what the headline leaves out. Repeat it, with the "as of" time.
-2. **Never sum rows whose `counted` is false.** A price below the confidence bar is shown on
-   its row and never added to anything.
+   product's own line on what the headline leaves out. Repeat it, with the "as of" time. No
+   "as of" means no single read time is behind the answer, as for PnL or activity, or that a
+   wallet has not been read yet, and then any total is a floor.
+2. **`counted` means inside the headline, and nothing else.** A row whose `counted` is false
+   is not in the total: a price below the confidence bar, a quote two days old, something
+   nobody chose to acquire, a row the person hid. Never add it to a sum. `hiddenReason` is why
+   the app folds a row, null when it is on screen: a small row can be counted and folded, and
+   a bought token quoted below the bar can be on screen and not counted.
 3. **`port_overview` is the total. Never add up `port_holdings` rows yourself.** The headline
    carries DeFi, venue balances and perp equity that no holdings row does.
 4. **A watched wallet is left out.** The overview, holdings, DeFi, perps, predictions, NFTs and

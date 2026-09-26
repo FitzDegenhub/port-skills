@@ -45,8 +45,10 @@ this skill is the reference for what the answers mean.
 
 Every answer is `{ data, asOf, notCounted, sources, generatedAt }`.
 
-- `asOf` is the oldest wallet read the answer rests on. Null means at least one wallet has
-  never been read, so any total is a floor.
+- `asOf` is how old the answer is: the oldest wallet read behind `/port` and `/holdings`, the
+  oldest venue read behind `/perps` and `/predictions`, the oldest account behind
+  `/positions`. Null means no single read time is behind the answer, as for `/me`, `/pnl` or
+  `/activity`, or that a wallet has not been read yet, and then any total is a floor.
 - `notCounted` is one sentence saying what the headline leaves out: rows priced by pools too
   thin to sell into, rows nothing has priced, stale quotes. Null when nothing is left out.
 - `sources` names the price sources behind the answer.
@@ -55,8 +57,12 @@ The reading rules are the product's, and they are what keeps a figure honest:
 
 1. **Quote `asOf` and `notCounted` with any figure.** A net worth without its caveat misleads
    by omission. Say how old it is and what is not in it, in the product's own sentence.
-2. **Never sum rows whose `counted` is false.** A price below the confidence bar is shown on
-   its row and never added to anything. Show it, say it is not counted, leave it out of sums.
+2. **`counted` means inside the headline, and nothing else.** A row whose `counted` is false
+   is not in the total: a price below the confidence bar, a quote two days old, something
+   nobody chose to acquire, a row the person hid. Show it, say it is not counted, never add it
+   to a sum. `hiddenReason` is a different question: why the app folds the row, null when it
+   is on screen, and the default page is the rows with none. A small row can be counted and
+   folded; a bought token quoted below the bar can be on screen and not counted.
 3. **`/port` is the total. Never add up `/holdings` yourself.** The headline includes DeFi,
    venue balances and perp equity that no holdings row carries, and leaves out what the
    product will not vouch for. Your own sum will be wrong both ways.
@@ -125,7 +131,8 @@ Errors are `{ error, message }`. Quote the `message`, it is written for a person
 
 - Never print the key, never put it in a URL, never write it to disk.
 - Prefer `/port` for any total. Never add `/holdings` rows yourself.
-- Never sum a row whose `counted` is false.
+- Never sum a row whose `counted` is false. `hiddenReason` says what the app shows, not what
+  it counts.
 - Quote `asOf` and `notCounted` with every figure you give.
 - Refresh only when asked. It costs the account one of 20 a day and the answer is the queue,
   not the new figures: read `/port` again after a minute or two.
