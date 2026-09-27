@@ -6,7 +6,7 @@ description: >-
   their wallets, their daily briefing or their alerts. Reads it over the Port_ REST API at
   https://getport.app/api/v1 with their own key. Read only.
 
-  TRIGGERS: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
+  Triggers: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
   wallet, Port_
 metadata:
   author: getport
@@ -153,4 +153,4 @@ Errors are `{ error, message }`. Quote the `message`, it is written for a person
 
 - Docs: [docs.getport.app/api](https://docs.getport.app/api/)
 - Make a key: [getport.app/settings/api](https://getport.app/settings/api)
-- Agent-readable summary: [getport.app/llms.txt](https://getport.app/llms.txt)
+- Agent-readable summary: [getport.app/api/v1/llms.txt](https://getport.app/api/v1/llms.txt)

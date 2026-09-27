@@ -13,14 +13,14 @@ over `https://getport.app`, so this repository is a pointer, not a client.
 One command connects every coding agent on your machine to your port:
 
 ```bash
-npx add-mcp https://getport.app/mcp --name port
+npx add-mcp@2.4.0 https://getport.app/mcp --name port -g
 ```
 
 The first time an agent uses it, it opens getport.app: sign in, press Allow, and it is connected.
 No key. Then teach them how Port_ answers:
 
 ```bash
-npx skills add FitzDegenhub/port-skills --yes
+npx skills add FitzDegenhub/port-skills -g
 ```
 
 claude.ai, Claude Desktop and ChatGPT: add a custom connector with the address

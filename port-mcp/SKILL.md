@@ -4,9 +4,9 @@ description: >-
   Use when the person asks about their own Port_ port and the Port_ MCP server is connected,
   or when they want to connect it: net worth, holdings, DeFi, perps, prediction markets, NFTs,
   PnL, what moved, the daily briefing, alerts. The server is https://getport.app/mcp, read
-  only, over the person's own API key or by signing in at getport.app.
+  only, by signing in at getport.app or with the person's own API key.
 
-  TRIGGERS: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
+  Triggers: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
   wallet, Port_, connect Port_, Port_ MCP
 metadata:
   author: getport
@@ -35,13 +35,13 @@ be disconnected.
 Every coding agent on the machine, in one command:
 
 ```bash
-npx add-mcp https://getport.app/mcp --name port
+npx add-mcp@2.4.0 https://getport.app/mcp --name port -g
 ```
 
 Or one agent at a time:
 
 ```bash
-claude mcp add --transport http port https://getport.app/mcp
+claude mcp add --transport http --scope user port https://getport.app/mcp
 codex mcp add port --url https://getport.app/mcp
 ```
 
@@ -69,11 +69,12 @@ chat and never print it.
 | What does my briefing say | `port_briefing` (`day`: YYYY-MM-DD) |
 | Which alerts fired | `port_alerts` |
 | Which wallets are on the account | `port_wallets` |
-| Read my wallets again now | `port_refresh`, listed only when the key may refresh |
+| Read my wallets again now | `port_refresh`, listed only when the key or the Allow page permits refresh |
 
 Each tool answers with a text block and `structuredContent`. The text leads with what is not
-counted, then one line of what came back, then how old it is. `structuredContent` is the same
-`data` the REST API answers, field for field.
+counted, then one line of what came back, then how old it is. `structuredContent` is the REST
+`data` with `asOf` and `notCounted` inside it; `port_overview` carries `chainsRead` and
+`chainsWithGaps` in place of the full per-chain list, and `port_holdings` pages at 100 rows.
 
 ## Reading the answers
 

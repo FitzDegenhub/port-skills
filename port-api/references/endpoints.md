@@ -111,7 +111,7 @@ MCP tool: `port_nfts`.
 
 Parameters:
 
-- `hidden` (query, boolean): Set to 1 or true to include what the product folds: phishing names and what arrived unasked.
+- `hidden` (query, boolean): Set to 1 or true to include pieces with a phishing name and collections you hid.
 
 Fields of `data`: `nfts`, `floorTotalUsd`, `note`, `folded`.
 
@@ -144,7 +144,7 @@ MCP tool: `port_activity`.
 Parameters:
 
 - `cursor` (query, string): The cursor from the previous page.
-- `hidden` (query, boolean): Set to 1 or true to include what the product folds: phishing names and what arrived unasked.
+- `hidden` (query, boolean): Set to 1 or true to include what the Activity page folds: phishing names and what arrived unasked.
 
 Notes:
 
