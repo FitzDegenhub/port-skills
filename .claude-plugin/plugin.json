@@ -8,7 +8,7 @@
     "url": "https://getport.app"
   },
   "homepage": "https://docs.getport.app/api/plugin/",
-  "repository": "https://github.com/FitzDegenhub/port-skills",
+  "repository": "https://github.com/getport/skills",
   "keywords": ["port", "portfolio", "crypto", "mcp"],
   "skills": ["./port-api", "./port-mcp"]
 }
