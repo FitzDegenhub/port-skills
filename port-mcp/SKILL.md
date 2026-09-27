@@ -4,7 +4,7 @@ description: >-
   Use when the person asks about their own Port_ port and the Port_ MCP server is connected,
   or when they want to connect it: net worth, holdings, DeFi, perps, prediction markets, NFTs,
   PnL, what moved, the daily briefing, alerts. The server is https://getport.app/mcp, read
-  only, over the person's own API key.
+  only, over the person's own API key or by signing in at getport.app.
 
   TRIGGERS: my port, my net worth, my holdings, my PnL, what did I lose on, what moved in my
   wallet, Port_, connect Port_, Port_ MCP
@@ -82,8 +82,9 @@ VS Code, in `.vscode/mcp.json`:
 { "servers": { "port": { "type": "http", "url": "https://getport.app/mcp", "headers": { "Authorization": "Bearer ${env:PORT_API_KEY}" } } } }
 ```
 
-claude.ai, Claude Desktop and ChatGPT connect through sign-in rather than a key, and that is not
-available yet.
+claude.ai, Claude Desktop and ChatGPT need no key: add a custom connector with the address
+`https://getport.app/mcp` and the person signs in at getport.app and presses Allow. The app is
+then listed under Settings, API access, where it can be disconnected.
 
 ## Which tool answers what
 

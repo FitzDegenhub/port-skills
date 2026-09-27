@@ -14,6 +14,9 @@ A Port_ Pro account and an API key, made under Settings, API access, at
 [getport.app/settings/api](https://getport.app/settings/api). The key is shown once. Keep it in
 the `PORT_API_KEY` environment variable and never paste it into a prompt.
 
+claude.ai, Claude Desktop and ChatGPT need no key and no install: add a custom connector with
+the address `https://getport.app/mcp` and sign in at getport.app when it asks.
+
 ## Install
 
 Claude Code:
