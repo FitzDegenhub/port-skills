@@ -51,7 +51,8 @@ Every answer is `{ data, asOf, notCounted, sources, generatedAt }`.
   `/activity`, or that a wallet has not been read yet, and then any total is a floor.
 - `notCounted` is one sentence saying what the headline leaves out: rows priced by pools too
   thin to sell into, rows nothing has priced, stale quotes. Null when nothing is left out.
-- `sources` names the price sources behind the answer.
+- `sources` says what kind of price the answer rests on: `market`, or a protocol's own figure
+  such as `oracle:venus`.
 
 The reading rules are the product's, and they are what keeps a figure honest:
 
