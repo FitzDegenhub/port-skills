@@ -143,6 +143,6 @@ retry in a loop.
 
 ## Links
 
-- Docs: [getport.app/docs](https://getport.app/docs)
+- Docs: [docs.getport.app/api/mcp](https://docs.getport.app/api/mcp/)
 - Make a key: [getport.app/settings/api](https://getport.app/settings/api)
 - The REST twin of every tool: the `port-api` skill in this repository

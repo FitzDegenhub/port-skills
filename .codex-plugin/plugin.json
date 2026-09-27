@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Read your own Port_ port from Codex: net worth, holdings, DeFi, PnL, with the caveats the app shows.",
   "author": { "name": "Port_", "url": "https://getport.app" },
-  "homepage": "https://getport.app/docs",
+  "homepage": "https://docs.getport.app/api/plugin/",
   "repository": "https://github.com/FitzDegenhub/port-skills",
   "keywords": ["port", "portfolio", "crypto", "mcp"],
   "skills": ["./port-api", "./port-mcp"],

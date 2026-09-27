@@ -57,4 +57,4 @@ Cursor and VS Code.
 
 This repository is published from the Port_ codebase and is overwritten on every change, so a
 pull request here would be lost. The endpoint reference is generated from the same table the API
-itself is built from. Docs: [getport.app/docs](https://getport.app/docs).
+itself is built from. Docs: [docs.getport.app](https://docs.getport.app/api/).

@@ -18,7 +18,7 @@ metadata:
 [Port_](https://getport.app) is a read-only crypto portfolio tracker. This API reads one
 account's own port, the one the key belongs to, from the same snapshot the app's screens read.
 It cannot move funds, sign anything, change a setting or reach a chain on anybody's behalf.
-Docs: [getport.app/docs](https://getport.app/docs).
+Docs: [docs.getport.app/api](https://docs.getport.app/api/).
 
 ## Authentication
 
@@ -146,6 +146,6 @@ Errors are `{ error, message }`. Quote the `message`, it is written for a person
 
 ## Links
 
-- Docs: [getport.app/docs](https://getport.app/docs)
+- Docs: [docs.getport.app/api](https://docs.getport.app/api/)
 - Make a key: [getport.app/settings/api](https://getport.app/settings/api)
 - Agent-readable summary: [getport.app/llms.txt](https://getport.app/llms.txt)
