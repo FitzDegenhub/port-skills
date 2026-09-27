@@ -109,7 +109,11 @@ NFTs at floor, with their own total, which is not in net worth.
 
 MCP tool: `port_nfts`.
 
-Fields of `data`: `nfts`, `floorTotalUsd`, `note`.
+Parameters:
+
+- `hidden` (query, boolean): Set to 1 or true to include what the product folds: phishing names and what arrived unasked.
+
+Fields of `data`: `nfts`, `floorTotalUsd`, `note`, `folded`.
 
 ```bash
 curl -s https://getport.app/api/v1/nfts -H "Authorization: Bearer $PORT_API_KEY"
@@ -140,12 +144,14 @@ MCP tool: `port_activity`.
 Parameters:
 
 - `cursor` (query, string): The cursor from the previous page.
+- `hidden` (query, boolean): Set to 1 or true to include what the product folds: phishing names and what arrived unasked.
 
 Notes:
 
 - A page can come back empty with a cursor that is not null. Keep paging until the cursor is null.
+- Transactions that arrived unasked or carry a phishing name are left out unless `hidden` is set, as the Activity page folds them, and `folded` counts them.
 
-Fields of `data`: `events`, `cursor`.
+Fields of `data`: `events`, `cursor`, `folded`.
 
 ```bash
 curl -s https://getport.app/api/v1/activity -H "Authorization: Bearer $PORT_API_KEY"
