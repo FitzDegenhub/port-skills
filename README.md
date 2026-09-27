@@ -6,27 +6,32 @@ holdings, DeFi, perps, prediction markets, NFTs, PnL, activity, the daily briefi
 with what is not counted and how old it is.
 
 Read only. Nothing here can move funds, sign a transaction or change a setting. Everything goes
-over `https://getport.app` with your own key, so this repository is a pointer, not a client.
-
-## What you need
-
-A Port_ Pro account and an API key, made under Settings, API access, at
-[getport.app/settings/api](https://getport.app/settings/api). The key is shown once. Keep it in
-the `PORT_API_KEY` environment variable and never paste it into a prompt.
-
-claude.ai, Claude Desktop and ChatGPT need no key and no install: add a custom connector with
-the address `https://getport.app/mcp` and sign in at getport.app when it asks.
+over `https://getport.app`, so this repository is a pointer, not a client.
 
 ## Install
 
-Claude Code:
+One command connects every coding agent on your machine to your port:
+
+```bash
+npx add-mcp https://getport.app/mcp --name port
+```
+
+The first time an agent uses it, it opens getport.app: sign in, press Allow, and it is connected.
+No key. Then teach them how Port_ answers:
+
+```bash
+npx skills add FitzDegenhub/port-skills --yes
+```
+
+claude.ai, Claude Desktop and ChatGPT: add a custom connector with the address
+`https://getport.app/mcp` and sign in when it asks.
+
+Or both at once as a plugin. Claude Code:
 
 ```text
 /plugin marketplace add FitzDegenhub/port-skills
 /plugin install port@port
 ```
-
-It asks for the key when the plugin is enabled and keeps it in the system's credential store.
 
 Codex:
 
@@ -35,16 +40,8 @@ codex plugin marketplace add FitzDegenhub/port-skills
 codex plugin add port@port
 ```
 
-Codex reads the key from `PORT_API_KEY`.
-
-Any tool that installs skills from a site:
-
-```bash
-npx skills add https://getport.app
-```
-
-Or connect the MCP server by hand: `port-mcp/SKILL.md` has the block for Claude Code, Codex,
-Cursor and VS Code.
+It needs a Port_ Pro account, which is free during the open beta. Scripts that call the REST
+API use a key instead, made under Settings, API access; `port-api/SKILL.md` has how.
 
 ## What is in here
 
@@ -53,7 +50,7 @@ Cursor and VS Code.
 | `port-api/` | The skill for the REST API, with every endpoint in `references/endpoints.md` |
 | `port-mcp/` | The skill for the MCP server at `https://getport.app/mcp` and how to connect it |
 | `.claude-plugin/` | The Claude Code marketplace and plugin manifest |
-| `.mcp.json` | The MCP server the Claude Code plugin registers, with your key as the header |
+| `.mcp.json` | The MCP server the Claude Code plugin registers; it signs you in the first time |
 | `.agents/plugins/`, `.codex-plugin/` | The Codex marketplace and plugin manifest |
 
 ## How it is made

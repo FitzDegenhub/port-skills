@@ -10,14 +10,13 @@
   "mcpServers": {
     "port": {
       "type": "http",
-      "url": "https://getport.app/mcp",
-      "bearer_token_env_var": "PORT_API_KEY"
+      "url": "https://getport.app/mcp"
     }
   },
   "interface": {
     "displayName": "Port_",
     "shortDescription": "Read your own Port_ port, read only",
-    "longDescription": "Net worth, holdings, DeFi, perps, predictions, NFTs, PnL, activity, the daily briefing and alerts from your own Port_ account, with what is not counted and how old it is. Needs a Pro account and PORT_API_KEY in the environment.",
+    "longDescription": "Net worth, holdings, DeFi, perps, predictions, NFTs, PnL, activity, the daily briefing and alerts from your own Port_ account, with what is not counted and how old it is. Needs a Port_ Pro account; signs you in at getport.app the first time.",
     "developerName": "Port_",
     "category": "Finance",
     "capabilities": ["Read"],

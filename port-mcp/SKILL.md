@@ -16,75 +16,43 @@ metadata:
 # Port_ MCP
 
 [Port_](https://getport.app) is a read-only crypto portfolio tracker. Its MCP server answers
-questions about one account's own port, the one the key belongs to, with the same reads and the
-same caveats as the app. It cannot move funds, sign anything or change a setting.
+questions about one account's own port, the one the person signed in as, with the same reads and
+the same caveats as the app. It cannot move funds, sign anything or change a setting.
 
-|             |                                            |
-| ----------- | ------------------------------------------ |
-| URL         | `https://getport.app/mcp`                  |
-| Transport   | Streamable HTTP, stateless                 |
-| Auth        | `Authorization: Bearer $PORT_API_KEY`      |
-| Limits      | 60 calls a minute, 5000 a day              |
-
-## Getting a key
-
-The person makes one under Settings, API access, at
-[getport.app/settings/api](https://getport.app/settings/api). It needs a Pro account, starts
-`port_` and is shown once. Keep it in the `PORT_API_KEY` environment variable. Never ask for it
-in the chat and never print it.
+|             |                                                                   |
+| ----------- | ----------------------------------------------------------------- |
+| URL         | `https://getport.app/mcp`                                         |
+| Transport   | Streamable HTTP, stateless                                        |
+| Auth        | Sign in at getport.app (OAuth 2.1), or a `port_` key as a bearer  |
+| Limits      | 60 calls a minute, 5000 a day                                     |
 
 ## Connecting
 
-Claude Code, with the plugin, which carries this server and both skills. It asks for the key
-when the plugin is enabled and keeps it in the system's credential store, not in a file:
+No key needed. The first time an agent calls the server it opens getport.app, the person signs
+in and presses Allow, and it is connected. It then shows under Settings, API access, where it can
+be disconnected.
 
-```text
-/plugin marketplace add FitzDegenhub/port-skills
-/plugin install port@port
-```
-
-If the key was skipped at install, `/plugin configure port@port` asks again. The `port-api`
-skill's curl calls still read `PORT_API_KEY` from the shell, so set that too if you want them.
-
-Claude Code, by hand. This stores the key itself in Claude Code's own settings in your home
-directory (`~/.claude.json`), not in the project; the plugin above keeps it in the credential
-store instead:
+Every coding agent on the machine, in one command:
 
 ```bash
-claude mcp add --transport http port https://getport.app/mcp --header "Authorization: Bearer $PORT_API_KEY"
+npx add-mcp https://getport.app/mcp --name port
 ```
 
-Codex, in `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.port]
-url = "https://getport.app/mcp"
-bearer_token_env_var = "PORT_API_KEY"
-```
-
-Or the plugin, which carries this server and both skills and reads the same `PORT_API_KEY`
-from the environment:
+Or one agent at a time:
 
 ```bash
-codex plugin marketplace add FitzDegenhub/port-skills
-codex plugin add port@port
+claude mcp add --transport http port https://getport.app/mcp
+codex mcp add port --url https://getport.app/mcp
 ```
 
-Cursor, in `.cursor/mcp.json`:
+In Claude Code, type `/mcp`, pick `port` and choose Authenticate if it has not asked already.
 
-```json
-{ "mcpServers": { "port": { "url": "https://getport.app/mcp", "headers": { "Authorization": "Bearer ${env:PORT_API_KEY}" } } } }
-```
+claude.ai, Claude Desktop and ChatGPT: add a custom connector with the address
+`https://getport.app/mcp` and sign in when it asks.
 
-VS Code, in `.vscode/mcp.json`:
-
-```json
-{ "servers": { "port": { "type": "http", "url": "https://getport.app/mcp", "headers": { "Authorization": "Bearer ${env:PORT_API_KEY}" } } } }
-```
-
-claude.ai, Claude Desktop and ChatGPT need no key: add a custom connector with the address
-`https://getport.app/mcp` and the person signs in at getport.app and presses Allow. The app is
-then listed under Settings, API access, where it can be disconnected.
+A key is for scripts and for anybody who wants one: make it under Settings, API access, keep it
+in `PORT_API_KEY`, and send it as `Authorization: Bearer $PORT_API_KEY`. Never ask for it in the
+chat and never print it.
 
 ## Which tool answers what
 

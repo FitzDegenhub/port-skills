@@ -10,14 +10,5 @@
   "homepage": "https://docs.getport.app/api/plugin/",
   "repository": "https://github.com/FitzDegenhub/port-skills",
   "keywords": ["port", "portfolio", "crypto", "mcp"],
-  "skills": ["./port-api", "./port-mcp"],
-  "userConfig": {
-    "PORT_API_KEY": {
-      "type": "string",
-      "title": "Port_ API key",
-      "description": "Your Port_ API key, made under Settings, API access, at getport.app/settings/api. It starts port_.",
-      "required": true,
-      "sensitive": true
-    }
-  }
+  "skills": ["./port-api", "./port-mcp"]
 }

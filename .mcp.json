@@ -2,8 +2,7 @@
   "mcpServers": {
     "port": {
       "type": "http",
-      "url": "https://getport.app/mcp",
-      "headers": { "Authorization": "Bearer ${user_config.PORT_API_KEY}" }
+      "url": "https://getport.app/mcp"
     }
   }
 }
