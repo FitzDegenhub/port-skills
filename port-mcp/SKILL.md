@@ -24,7 +24,7 @@ the same caveats as the app. It cannot move funds, sign anything or change a set
 | URL         | `https://getport.app/mcp`                                         |
 | Transport   | Streamable HTTP, stateless                                        |
 | Auth        | Sign in at getport.app (OAuth 2.1), or a `port_` key as a bearer  |
-| Limits | Pro 60 a minute, 5,000 a day and 20 refreshes a day; Pro+ 120, 20,000 and 50; Whale 300, 100,000 and 200. Free has no API. |
+| Limits | Pro+ 300 a minute, 25,000 a day and 3 refreshes a day; Ultra 600, 100,000 and 3. Free and Pro have no API. |
 
 ## Connecting
 
