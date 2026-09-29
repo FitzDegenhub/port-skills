@@ -6,7 +6,7 @@ Base URL `https://getport.app`. Every request carries `Authorization: Bearer $PO
 
 Port, holdings, positions, perps, predictions, NFTs and activity are about the wallets you own: watched wallets and wallets you have excluded are left out, as they are on those screens, and a refresh reads only the same wallets. PnL covers every wallet on the account, as the PnL screen does, and so does `walletCount` in `/api/v1/me`. `/api/v1/wallets` lists every wallet, each marked.
 
-Limits: 60 requests a minute, 5000 a day, and 20 refreshes a day. Past one, the answer is 429 with `Retry-After`.
+Limits, per account by plan: Pro 60 a minute, 5,000 a day and 20 refreshes a day; Pro+ 120, 20,000 and 50; Whale 300, 100,000 and 200. Free has no API. Past one, the answer is 429 with `Retry-After`.
 
 ## GET /api/v1/me
 
@@ -129,7 +129,7 @@ Parameters:
 
 - `method` (query, string): fifo, lifo, hifo or average. Defaults to the account setting.
 
-Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `income`, `hiddenByYou`.
+Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `income`, `hiddenByYou`, `viewableFrom`.
 
 ```bash
 curl -s https://getport.app/api/v1/pnl -H "Authorization: Bearer $PORT_API_KEY"
@@ -150,8 +150,9 @@ Notes:
 
 - A page can come back empty with a cursor that is not null. Keep paging until the cursor is null.
 - Transactions that arrived unasked or carry a phishing name are left out unless `hidden` is set, as the Activity page folds them, and `folded` counts them.
+- Your plan decides how far back this reads: rows older than `viewableFrom` are not returned and the cursor ends there. Null means all of it. PnL is computed over everything either way.
 
-Fields of `data`: `events`, `cursor`, `folded`.
+Fields of `data`: `events`, `cursor`, `folded`, `viewableFrom`.
 
 ```bash
 curl -s https://getport.app/api/v1/activity -H "Authorization: Bearer $PORT_API_KEY"
@@ -197,7 +198,7 @@ MCP tool: `port_refresh`.
 
 Notes:
 
-- Needs a key made with refresh allowed, or it answers 403 `refresh_not_allowed`. Counts against the 20 refreshes a day, and answers 202 with how many wallets were queued.
+- Needs a key made with refresh allowed, or it answers 403 `refresh_not_allowed`. Counts against your plan's refreshes a day (20 a day on Pro, 50 on Pro+ and 200 on Whale), and answers 202 with how many wallets were queued.
 
 Fields of `data`: `queued`.
 

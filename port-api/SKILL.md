@@ -37,7 +37,7 @@ this skill is the reference for what the answers mean.
 | Base URL           | `https://getport.app/api/v1`                           |
 | Auth               | `Authorization: Bearer $PORT_API_KEY`                  |
 | Format             | JSON, amounts and USD figures as strings               |
-| Limits             | 60 requests a minute, 5000 a day, 20 refreshes a day   |
+| Limits | Pro 60 a minute, 5,000 a day and 20 refreshes a day; Pro+ 120, 20,000 and 50; Whale 300, 100,000 and 200. Free has no API. |
 | OpenAPI            | `https://getport.app/api/v1/openapi.json`, no key      |
 | Endpoint reference | [references/endpoints.md](references/endpoints.md)     |
 
@@ -139,8 +139,8 @@ Errors are `{ error, message }`. Quote the `message`, it is written for a person
 - Never sum a row whose `counted` is false. `hiddenReason` says what the app shows, not what
   it counts.
 - Quote `asOf` and `notCounted` with every figure you give.
-- Refresh only when asked. It costs the account one of 20 a day and the answer is the queue,
-  not the new figures: read `/port` again after a minute or two.
+- Refresh only when asked. It costs the account one of its plan's refreshes a day (see Limits)
+  and the answer is the queue, not the new figures: read `/port` again after a minute or two.
 - Join tokens by contract address, never by ticker. A ticker is what impersonation attacks.
 
 ## References
