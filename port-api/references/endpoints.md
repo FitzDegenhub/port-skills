@@ -121,15 +121,11 @@ curl -s https://getport.app/api/v1/nfts -H "Authorization: Bearer $PORT_API_KEY"
 
 ## GET /api/v1/pnl
 
-Cost basis and realised PnL from the ledger, with the lots and what is missing.
+Trading profit from the ledger: realised and unrealised on swaps and fills, first in first out, with the open lots and what is missing.
 
 MCP tool: `port_pnl`.
 
-Parameters:
-
-- `method` (query, string): fifo, lifo, hifo or average. Defaults to the account setting.
-
-Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `income`, `hiddenByYou`, `viewableFrom`.
+Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `unmatchedSales`, `income`, `hiddenByYou`, `viewableFrom`.
 
 ```bash
 curl -s https://getport.app/api/v1/pnl -H "Authorization: Bearer $PORT_API_KEY"

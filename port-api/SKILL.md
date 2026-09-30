@@ -2,7 +2,7 @@
 name: port-api
 description: >-
   Use when the person asks about their own Port_ port: what it is worth, what they hold,
-  what is in DeFi, their perps, prediction markets, NFTs, PnL and cost basis, what moved in
+  what is in DeFi, their perps, prediction markets, NFTs, their trading PnL, what moved in
   their wallets, their daily briefing or their alerts. Reads it over the Port_ REST API at
   https://getport.app/api/v1 with their own key. Read only.
 
@@ -103,7 +103,7 @@ longer Pro. Say that plainly rather than retrying.
 | What perps do I have open | `GET /perps` |
 | What prediction markets am I in | `GET /predictions` |
 | What NFTs do I hold | `GET /nfts` |
-| What is my PnL, what did I lose on | `GET /pnl`, `?method=fifo` `lifo` `hifo` `average` |
+| What is my PnL, what did I lose on | `GET /pnl` |
 | What moved in my wallets | `GET /activity`, paged to the end |
 | What does my briefing say | `GET /briefing`, `?day=YYYY-MM-DD` |
 | Which alerts fired | `GET /alerts` |

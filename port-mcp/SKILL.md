@@ -64,7 +64,7 @@ chat and never print it.
 | What perps do I have open | `port_perps` |
 | What prediction markets am I in | `port_predictions` |
 | What NFTs do I hold and at what floor | `port_nfts` |
-| What is my realised PnL and cost basis | `port_pnl` (`method`: fifo, lifo, hifo, average) |
+| How did my trades do, realised and unrealised | `port_pnl` |
 | What moved in my wallets | `port_activity` (`cursor`) |
 | What does my briefing say | `port_briefing` (`day`: YYYY-MM-DD) |
 | Which alerts fired | `port_alerts` |
