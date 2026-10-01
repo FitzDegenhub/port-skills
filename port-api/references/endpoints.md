@@ -125,7 +125,7 @@ Trading profit from the ledger: realised and unrealised on swaps and fills, firs
 
 MCP tool: `port_pnl`.
 
-Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `unmatchedSales`, `income`, `hiddenByYou`, `viewableFrom`.
+Fields of `data`: `method`, `realised30dUsd`, `realisedYtdUsd`, `unrealisedUsd`, `feesYtdUsd`, `fundingYtdUsd`, `byMonth`, `byAsset`, `bySource`, `unrealisedByWallet`, `lots`, `trades`, `fees`, `trades30dCount`, `complete`, `pricedEvents`, `unpricedEvents`, `unmatchedSales`, `unplacedMoves`, `income`, `hiddenByYou`, `viewableFrom`.
 
 ```bash
 curl -s https://getport.app/api/v1/pnl -H "Authorization: Bearer $PORT_API_KEY"
