@@ -85,7 +85,7 @@ Perp positions, orders and fills per venue, with when each venue was last read.
 
 MCP tool: `port_perps`.
 
-Fields of `data`: `positions`, `orders`, `fills`, `equityUsd`, `marginUsedPct`, `funding7dUsd`, `fees30dUsd`, `maintenanceMarginUsd`, `marginRatioPct`, `withdrawableUsd`, `notionalUsd`, `accountLeverage`, `fundingDailyUsd`, `funding7dMeasured`, `vaults`, `subAccounts`, `equityHistory`, `pnlHistory`, `netFlow7dUsd`, `volume7dUsd`, `liquidations`, `asOf`, `venues`.
+Fields of `data`: `positions`, `orders`, `fills`, `equityUsd`, `marginUsedPct`, `funding7dUsd`, `fees30dUsd`, `maintenanceMarginUsd`, `marginRatioPct`, `withdrawableUsd`, `notionalUsd`, `accountLeverage`, `fundingDailyUsd`, `funding7dMeasured`, `vaults`, `subAccounts`, `equityHistory`, `pnlHistory`, `netFlow7dUsd`, `volume7dUsd`, `liquidations`, `asOf`, `venues`, `accounts`.
 
 ```bash
 curl -s https://getport.app/api/v1/perps -H "Authorization: Bearer $PORT_API_KEY"
